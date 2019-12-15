@@ -1,0 +1,87 @@
+﻿@page "/"
+
+<h1>Hello, world!</h1>
+
+Welcome to your new app.
+
+<br />
+
+<MatSelect Label="Pick a Food Group" @bind-Value="@intValue">
+    <MatOption TValue="int" Value="0"></MatOption>
+    <MatOption TValue="int" Value="1">Bread, Cereal, Rice, and Pasta</MatOption>
+    <MatOption TValue="int" Value="2">Vegetables</MatOption>
+    <MatOption TValue="int" Value="3">Fruit</MatOption>
+</MatSelect>
+
+<span>@intValue</span>
+
+@code
+{
+    int intValue;
+}
+
+
+
+<hr />
+
+<p>
+    <MatDatePicker @bind-Value="@Date1"></MatDatePicker>
+</p>
+<MatButton OnClick="@(_ =>
+                              {
+                                  Date1 = DateTime.Now;
+                              })">
+    Now
+</MatButton>
+<MatButton OnClick="@(_ =>
+                              {
+                                  Date1 = null;
+                              })">
+    Empty
+</MatButton>
+
+<span>@(Date1.HasValue ? Date1.Value.ToLocalTime().ToString() : "")</span>
+
+@code
+        {
+    public DateTime? Date1 { get; set; } = DateTime.Now.AddDays(-10);
+}
+
+
+
+<hr />
+
+
+<p>
+            <MatTextField @bind-Value="@MyString8" Label="Full Width" FullWidth="true"></MatTextField>
+        </p>
+        <p>
+            <MatTextField @bind-Value="@MyString8" Dense="true" Label="Dense" FullWidth="true"></MatTextField>
+        </p>
+        <p>
+            <MatTextField @bind-Value="@MyString8" Label="Leading Icon" Icon="mail_outline" FullWidth="true" Required="true"></MatTextField>
+        </p>
+        <p>
+            <MatTextField @bind-Value="@MyString8" Label="Trailing Icon - Password" Icon="lock_outline" IconTrailing="true" FullWidth="true" Required="true" Type="password"></MatTextField>
+        </p>
+        <p>
+            <div class="text-field-container">
+                <MatTextField @bind-Value="@MyString8" Label="Label" FullWidth="true"></MatTextField>
+            </div>
+        </p>
+ 
+        @code
+        {
+ 
+            public string MyString8
+            {
+                get => _myString8;
+                set
+                {
+                    _myString8 = value;
+                    this.StateHasChanged();
+                }
+            }
+ 
+            private string _myString8;
+        }
